@@ -1,0 +1,158 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "d160a80d3b8f2d4969d10a045039ceb3",
+    "entities": [
+      {
+        "tableName": "repo_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_repo` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_name` TEXT NOT NULL, `repo_name` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_repo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "user_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "repo_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_repo"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_repo_table_repo_name",
+            "unique": true,
+            "columnNames": [
+              "repo_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_repo_table_repo_name` ON `${TABLE_NAME}` (`repo_name`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "star_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_star` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `repo_star` TEXT NOT NULL, `starred_at` TEXT NOT NULL, `login` TEXT NOT NULL, `id` INTEGER NOT NULL, `avatar_url` TEXT NOT NULL, FOREIGN KEY(`repo_star`) REFERENCES `repo_table`(`repo_name`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_star",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repoName",
+            "columnName": "repo_star",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "starred_at",
+            "columnName": "starred_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.login",
+            "columnName": "login",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user.avatar_url",
+            "columnName": "avatar_url",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_star"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_star_table_repo_star",
+            "unique": true,
+            "columnNames": [
+              "repo_star"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_star_table_repo_star` ON `${TABLE_NAME}` (`repo_star`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "repo_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "repo_star"
+            ],
+            "referencedColumns": [
+              "repo_name"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "favorite_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_fav` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `userName` TEXT NOT NULL, `fav_name` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_fav",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "favRepo",
+            "columnName": "fav_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_fav"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd160a80d3b8f2d4969d10a045039ceb3')"
+    ]
+  }
+}

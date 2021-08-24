@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button" />
+    <string name="edit_id" />
+    <string name="github_id" />
+    <string name="image_github" />
+    <string name="example" />
+    <string name="data">Data</string>
+    <string name="id">Id</string>
+    <string name="login">Login</string>
+</resources>

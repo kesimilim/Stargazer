@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Stargazer</string>
+    <string name="button" />
+    <string name="edit_id" />
+    <string name="github_id" />
+    <string name="image_github" />
+    <string name="example">Example Text</string>
+    <string name="data">Data</string>
+    <string name="id">Id</string>
+    <string name="login">Login</string>
+</resources>
